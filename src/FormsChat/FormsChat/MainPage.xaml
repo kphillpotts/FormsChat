@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FormsChat.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:eff="clr-namespace:FormsChat.Effects"
+    xmlns:local="clr-namespace:FormsChat">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:MessageDataTemplateSelector x:Key="MessageSelector"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="AUTO" />
+        </Grid.RowDefinitions>
+        <ListView
+            x:Name="MessageListView"
+            BackgroundColor="Yellow"
+            ItemsSource="{Binding Messages}"
+            SelectionMode="None" 
+            HasUnevenRows="True"
+            SeparatorVisibility="None"
+            ItemTemplate="{StaticResource MessageSelector}">
+            
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.Effects>
+                <eff:TopPaddingWhenKeyboardAppearsEffect />
+            </Grid.Effects>
+            <Entry x:Name="EntryText" Completed="Entry_Completed" ReturnCommand="{Binding SubmitMessageCommand}" ReturnCommandParameter="{Binding TextEntry}" Text="{Binding TextEntry}" Focused="EntryText_Focused"/>
+            <!--<Button Grid.Column="1" Command="{Binding SubmitMessageCommand}" Text="Send" WidthRequest="50" Clicked="Button_Clicked"/>-->
+        </Grid>
+    </Grid>
+
+</ContentPage>
