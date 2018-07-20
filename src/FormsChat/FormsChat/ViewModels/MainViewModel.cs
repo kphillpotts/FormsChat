@@ -11,6 +11,9 @@ namespace FormsChat.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+
+        public event EventHandler DataAdded;
+
         public IList<TextChatViewModel> Messages { get; set; }
 
         public string TextEntry { get; set; }
@@ -32,6 +35,8 @@ namespace FormsChat.ViewModels
             if (lastMessage != null && lastMessage.Direction != TextChatViewModel.ChatDirection.Incoming)
             {
                 Messages.Add(new TextChatViewModel() { Direction = TextChatViewModel.ChatDirection.Incoming, Text = $"You said {lastMessage.Text}" });
+                //MessagingCenter.Send<MainViewModel>(this, "EntryAdded");
+                DataAdded?.Invoke(this, null);
             }
             return true;
         }
@@ -41,6 +46,8 @@ namespace FormsChat.ViewModels
             var x = new TextChatViewModel() { Direction = TextChatViewModel.ChatDirection.Outgoing, Text = obj };
             Messages.Add(x);
             TextEntry = string.Empty;
+            DataAdded?.Invoke(this, null);
+            //MessagingCenter.Send<MainViewModel>(this, "EntryAdded");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace FormsChat
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new Views.ChatPageResize();
 		}
 
 		protected override void OnStart ()

@@ -8,10 +8,10 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:MessageDataTemplateSelector x:Key="MessageSelector"/>
+            <local:MessageDataTemplateSelector x:Key="MessageSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -20,13 +20,11 @@
         <ListView
             x:Name="MessageListView"
             BackgroundColor="Yellow"
-            ItemsSource="{Binding Messages}"
-            SelectionMode="None" 
             HasUnevenRows="True"
-            SeparatorVisibility="None"
-            ItemTemplate="{StaticResource MessageSelector}">
-            
-        </ListView>
+            ItemTemplate="{StaticResource MessageSelector}"
+            ItemsSource="{Binding Messages}"
+            SelectionMode="None"
+            SeparatorVisibility="None" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -35,7 +33,13 @@
             <Grid.Effects>
                 <eff:TopPaddingWhenKeyboardAppearsEffect />
             </Grid.Effects>
-            <Entry x:Name="EntryText" Completed="Entry_Completed" ReturnCommand="{Binding SubmitMessageCommand}" ReturnCommandParameter="{Binding TextEntry}" Text="{Binding TextEntry}" Focused="EntryText_Focused"/>
+            <Entry
+                x:Name="EntryText"
+                Completed="Entry_Completed"
+                Focused="EntryText_Focused"
+                ReturnCommand="{Binding SubmitMessageCommand}"
+                ReturnCommandParameter="{Binding TextEntry}"
+                Text="{Binding TextEntry}" />
             <!--<Button Grid.Column="1" Command="{Binding SubmitMessageCommand}" Text="Send" WidthRequest="50" Clicked="Button_Clicked"/>-->
         </Grid>
     </Grid>
